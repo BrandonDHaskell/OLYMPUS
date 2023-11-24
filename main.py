@@ -8,20 +8,42 @@ of doors so members can scan to get into the facility.
 
 # imports
 from utils.Logger import create_logger
+from db.JsonDatabase import JsonDatabase
 
 # Global variables
 
 # main
 def main():
+    # Initialize service
+
+    # Logger
     logger = create_logger('Olympus')
     logger.info("Starting Olympus...")
 
-    # Initialize service objects
-        
-        # DB ITEMS
+    # Database
+    db = JsonDatabase('db/data/RfidDb.json')
+    logger.info("Database initialized...")
 
-        # Initialize Database
-            # TODO
+
+    # Temp Testing
+    try:
+        db.add_record('rfid1234', 'admin', 'new')
+    except ValueError as e:
+        logger.error("Error adding record: %s", e)
+
+    record = db.get_record_by_rfid('rfid1234')
+    logger.info('%s', record)
+
+    try:
+        db.add_record('rfid2345', 'admin', 'new')
+    except ValueError as e:
+        logger.error("Error adding record: %s", e)
+
+    record = db.get_record_by_rfid('rfid2345')
+    logger.info('%s', record)
+
+
+    # Initialize service objects
         
         # HARDWARE ITEMS
         

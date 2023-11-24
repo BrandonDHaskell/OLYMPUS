@@ -1,3 +1,4 @@
+import os
 import json
 import uuid
 from datetime import datetime
@@ -13,31 +14,33 @@ class JsonDatabase:
     # attempt to load the JSON file
     # if it doesn't exist, create a new empty file
     def _load_data(self):
+        os.makedirs(os.path.dirname(self.filepath), exist_ok=True)
         try:
             with open(self.filepath, 'r') as file:
                 return json.load(file)
         except FileNotFoundError:
             with open(self.filepath, 'w') as file:
-                json.dump({}, file, indent=4)
+                json.dump({}, file)
             return {}
 
     # Write to JSON file (aka save)
     def _save_data(self):
         with open(self.filepath, 'w') as file:
-            json.dump(self.data, file, indent=4)
+            json.dump(self.data, file)
 
 
     # Adds a new record to the JSON db
     # Ensure uniqueness across UUIDs and RFIDs
-    def add_record(self, id, rfid, member_level, membership_status):
-        if any(record[rfid] == rfid for record in self.data.values):
+    def add_record(self, rfid, member_level, membership_status):
+        # Check for existing RFID
+        if any(record['rfid'] == rfid for record in self.data.values()):
             raise ValueError("RFID already exists.")
         
         new_id = str(uuid.uuid4())
         while new_id in self.data:
             new_id = str(uuid.uuid4())
 
-        self.data[id] = {
+        self.data[new_id] = {
             'rfid': rfid,
             'member_level': member_level,
             'membership_status': membership_status,
