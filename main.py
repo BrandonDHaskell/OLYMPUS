@@ -7,10 +7,14 @@ of doors so members can scan to get into the facility.
 """
 
 # imports
+from utils.Logger import create_logger
 
 # Global variables
 
 # main
+def main():
+    logger = create_logger('Olympus')
+    logger.info("Starting Olympus...")
 
     # Initialize service objects
         
@@ -18,13 +22,6 @@ of doors so members can scan to get into the facility.
 
         # Initialize Database
             # TODO
-        
-        
-        # UTILITY ITEMS
-
-        # Initialize Service logger as Logger
-            # TODO
-        
         
         # HARDWARE ITEMS
         
@@ -133,3 +130,6 @@ of doors so members can scan to get into the facility.
                             # TODO
                 # End loop
     # End Service loop
+
+if __name__ == "__main__":
+    main()
