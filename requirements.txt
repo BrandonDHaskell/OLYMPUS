@@ -1,3 +1,0 @@
-RPi.GPIO
-spidev
-mfrc522
