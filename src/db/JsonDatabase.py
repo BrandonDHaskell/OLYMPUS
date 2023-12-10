@@ -41,9 +41,10 @@ class JsonDatabase:
             new_id = str(uuid.uuid4())
 
         self.data[new_id] = {
-            'rfid': rfid,
+            'obf_rfid': obf_rfid,
             'member_level': member_level,
             'membership_status': membership_status,
+            'member_sponsor': member_sponsor,
             'last_activity': datetime.now().isoformat()
         }
         self._save_data()
