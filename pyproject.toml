@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "nb-shed-2023"
+name = "olympus"
 version = "0.1.0"
 description = "NB Secure-ish Hacker Entrance Device"
 authors = ["Your Name <you@example.com>"]
@@ -7,6 +7,9 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+spidev = "^3.6"
+RPi.GPIO = "^0.7.1"
+mfrc522 = "^0.0.7"
 
 
 [build-system]
