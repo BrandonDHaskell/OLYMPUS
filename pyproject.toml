@@ -7,8 +7,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-spidev = "^3.6"
 "RPi.GPIO" = {version = "^0.7.1", platform = "linux"}
+spidev = "^3.6"
 mfrc522 = "^0.0.7"
 
 
