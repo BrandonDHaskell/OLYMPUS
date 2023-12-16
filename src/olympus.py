@@ -72,17 +72,24 @@ def main():
     # Begin service loop
     try:
         while True:
+            
+            # RFID Scan and validate operations
+            h_id = get_hashed_id()
+            if h_id != "":
+                print(h_id)
+
+            # Door open/close checking and handling
             current_door_state = door_open_status_switch.read()
             print("Current door state: ", current_door_state)
 
-            # Test an only update if status changes
+            # Test and only update if status changes
             if current_door_state != last_door_state:
                 if current_door_state == GPIO.HIGH:
                     print("Door closed")
-                    # TODO handle door open event
+                    # TODO handle door close event
                 else:
                     print("Door open")
-                    # TODO handle door close event
+                    # TODO handle door open event
 
                 # Update last state
                 last_door_state = current_door_state
