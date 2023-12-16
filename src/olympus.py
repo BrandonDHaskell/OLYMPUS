@@ -86,6 +86,7 @@ def main():
                 # Update last state
                 last_door_state = current_door_state
             
+            print("sleeping 7 sec...")
             time.sleep(7)
 
     except Exception as e:
