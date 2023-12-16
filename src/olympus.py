@@ -8,12 +8,13 @@ of doors so members can scan to get into the facility.
 
 # imports
 import time
+import RPi.GPIO as GPIO
 
 from utils.Logger import create_logger
 from db.JsonDatabase import JsonDatabase
 from hardware_io.rfid_scanner import get_hashed_id
 from hardware_io.toggle_switch import ToggleSwitch
-from RPi.GPIO import GPIO
+
 
 # Global variables
 
