@@ -7,7 +7,6 @@ import RPi.GPIO as GPIO
 class ToggleSwitch:
     def __init__(self, pin, mode):
         self.pin = pin
-        GPIO.setmode(GPIO.BCM)
 
         # Config switch as either INPUT or OUTPUT
         # throw an error if neither is passed

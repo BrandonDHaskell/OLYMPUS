@@ -9,6 +9,8 @@ of doors so members can scan to get into the facility.
 # imports
 import time
 import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
 
 from utils.Logger import create_logger
 from db.JsonDatabase import JsonDatabase
@@ -83,6 +85,7 @@ def main():
             # Update last state
             last_door_state = current_door_state
         
+        GPIO.cleanup()
         time.sleep(7)
 
         # Get Add_Member_State status
