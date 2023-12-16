@@ -28,6 +28,3 @@ class ToggleSwitch:
             GPIO.output(self.pin, value)
         else:
             raise RuntimeError("GPIO pin not set as OUTPUT")
-        
-    # def cleanup(self):
-    #     GPIO.cleanup(self.pin)
