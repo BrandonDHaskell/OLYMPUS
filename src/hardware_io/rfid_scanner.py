@@ -1,13 +1,15 @@
-## added test code to validate card config
-
 import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
+from argon2 import PasswordHasher
 
 reader = SimpleMFRC522()
+ph = PasswordHasher()
 
-try:
-    id, text = reader.read()
-    print(id)
-    print(text)
-finally:
-    GPIO.cleanup()
+# Reads an RFID tag, hashes the ID and returns the hashed ID
+def get_hashed_id():
+    try:
+        id, text = reader.read()
+        hashed_id = ph.hash(str(id))
+        return hashed_id
+    finally:
+        GPIO.cleanup()
