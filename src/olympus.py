@@ -32,7 +32,7 @@ def main():
     db = JsonDatabase('db/data/RfidDb.json')
     logger.info("Database initialized...")
 
-    door_open_status_switch = ToggleSwitch(3, 'input')
+    door_open_status_switch = ToggleSwitch(17, 'input')
     last_door_state = None
 
     # Temp Testing
@@ -81,7 +81,7 @@ def main():
                     print("Door closed")
                     # TODO handle door open event
                 else:
-                    print("Door closed")
+                    print("Door open")
                     # TODO handle door close event
 
                 # Update last state
