@@ -7,8 +7,13 @@ of doors so members can scan to get into the facility.
 """
 
 # imports
+import time
+
 from utils.Logger import create_logger
 from db.JsonDatabase import JsonDatabase
+from hardware_io.rfid_scanner import get_hashed_id
+from hardware_io.toggle_switch import ToggleSwitch
+from RPi.GPIO import GPIO
 
 # Global variables
 
@@ -24,23 +29,25 @@ def main():
     db = JsonDatabase('db/data/RfidDb.json')
     logger.info("Database initialized...")
 
+    door_open_status_switch = ToggleSwitch(3, 'input')
+    last_door_state = None
 
     # Temp Testing
-    try:
-        db.add_record('rfid1234', 'admin', 'new')
-    except ValueError as e:
-        logger.error("Error adding record: %s", e)
+    # try:
+    #     db.add_record('rfid1234', 'admin', 'new')
+    # except ValueError as e:
+    #     logger.error("Error adding record: %s", e)
 
-    record = db.get_record_by_rfid('rfid1234')
-    logger.info('%s', record)
+    # record = db.get_record_by_rfid('rfid1234')
+    # logger.info('%s', record)
 
-    try:
-        db.add_record('rfid2345', 'admin', 'new')
-    except ValueError as e:
-        logger.error("Error adding record: %s", e)
+    # try:
+    #     db.add_record('rfid2345', 'admin', 'new')
+    # except ValueError as e:
+    #     logger.error("Error adding record: %s", e)
 
-    record = db.get_record_by_rfid('rfid2345')
-    logger.info('%s', record)
+    # record = db.get_record_by_rfid('rfid2345')
+    # logger.info('%s', record)
 
 
     # Initialize service objects
@@ -60,6 +67,23 @@ def main():
 
 
     # Begin service loop
+    while True:
+        current_door_state = door_open_status_switch.read()
+
+        # Test an only update if status changes
+        if current_door_state != last_door_state:
+            if current_door_state == GPIO.HIGH:
+                print("Door closed")
+                # TODO handle door open event
+            else:
+                print("Door closed")
+                # TODO handle door close event
+
+            # Update last state
+            last_door_state = current_door_state
+        
+        time.sleep(7)
+
         # Get Add_Member_State status
         # If Add_Member_State == False (Switch Off)
             # Ping for RFID response (Scanner.scan())
