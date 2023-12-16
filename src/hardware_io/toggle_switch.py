@@ -11,9 +11,9 @@ class ToggleSwitch:
         # Config switch as either INPUT or OUTPUT
         # throw an error if neither is passed
         if mode.lower() == 'input':
-            GPIO.setup(self.pin, GPIO.IN)
+            GPIO.setup(self.pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         elif mode.lower() == 'output':
-            GPIO.setup(self.pin, GPIO.OUT)
+            GPIO.setup(self.pin, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
         else:
             raise ValueError("Invalid mode provided. Mode should be 'input' or 'output'.")
         
