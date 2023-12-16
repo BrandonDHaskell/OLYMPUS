@@ -14,5 +14,3 @@ def get_hashed_id():
     except Exception as e:
         # TODO: add logging
         print("Error: ", e)
-    finally:
-        GPIO.cleanup()
