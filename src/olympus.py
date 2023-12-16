@@ -70,23 +70,28 @@ def main():
 
 
     # Begin service loop
-    while True:
-        current_door_state = door_open_status_switch.read()
+    try:
+        while True:
+            current_door_state = door_open_status_switch.read()
 
-        # Test an only update if status changes
-        if current_door_state != last_door_state:
-            if current_door_state == GPIO.HIGH:
-                print("Door closed")
-                # TODO handle door open event
-            else:
-                print("Door closed")
-                # TODO handle door close event
+            # Test an only update if status changes
+            if current_door_state != last_door_state:
+                if current_door_state == GPIO.HIGH:
+                    print("Door closed")
+                    # TODO handle door open event
+                else:
+                    print("Door closed")
+                    # TODO handle door close event
 
-            # Update last state
-            last_door_state = current_door_state
-        
+                # Update last state
+                last_door_state = current_door_state
+            
+            time.sleep(7)
+
+    except Exception as e:
+        logger.error("Error: ", e)
+    finally:
         GPIO.cleanup()
-        time.sleep(7)
 
         # Get Add_Member_State status
         # If Add_Member_State == False (Switch Off)
