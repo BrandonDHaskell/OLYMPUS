@@ -73,6 +73,7 @@ def main():
     try:
         while True:
             current_door_state = door_open_status_switch.read()
+            print("Current door state: ", current_door_state)
 
             # Test an only update if status changes
             if current_door_state != last_door_state:
